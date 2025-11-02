@@ -1,4 +1,3 @@
-
 <?php
 require_once __DIR__ . '/../utilidades/Router.php';
 require_once __DIR__.'/rutaejemplo.php';

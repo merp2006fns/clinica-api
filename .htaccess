@@ -1,7 +1,7 @@
 RewriteEngine On
 RewriteBase /
 
-# Responder preflight OPTIONS rápido (no ejecuta index.php)
+# Responder preflight OPTIONS rápido (si Apache recibe la petición)
 RewriteCond %{REQUEST_METHOD} =OPTIONS
 RewriteRule ^ - [R=200,L]
 
