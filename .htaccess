@@ -1,0 +1,22 @@
+RewriteEngine On
+RewriteBase /
+
+# Permitir sólo los orígenes que uses
+SetEnvIf Origin "https://clinica-frontend-react.vercel.app" ORIGIN_ALLOWED=$0
+SetEnvIf Origin "http://localhost:5173" ORIGIN_ALLOWED=$0
+
+<IfModule mod_headers.c>
+  Header always set Access-Control-Allow-Origin "%{ORIGIN_ALLOWED}e" env=ORIGIN_ALLOWED
+  Header always set Access-Control-Allow-Credentials "true" env=ORIGIN_ALLOWED
+  Header always set Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS" env=ORIGIN_ALLOWED
+  Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With" env=ORIGIN_ALLOWED
+</IfModule>
+
+# Responder preflight OPTIONS con 200 y sin ejecutar index.php
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^ - [L,R=200]
+
+# Redirigir todo lo demás al front controller (index.php)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
