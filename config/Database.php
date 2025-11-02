@@ -11,10 +11,10 @@ class Database
 
     private function __construct()
     {
-        $host = getenv("DB_HOST");
-        $user = getenv("DB_USER");
-        $pass = getenv("DB_PASSWORD");
-        $db = getenv("DB_NAME");
+        $host = getenv("DB_HOST") ?? 'localhost';
+        $user = getenv("DB_USER") ?? 'root';
+        $pass = getenv("DB_PASSWORD") ?? '';
+        $db = getenv("DB_NAME") ?? 'clinica';
 
         $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 
