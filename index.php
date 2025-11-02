@@ -4,13 +4,15 @@
 
 // START — no imprimir nada antes de esto
 if (session_status() === PHP_SESSION_NONE) {
+    $isLocal = in_array($_SERVER['HTTP_HOST'], ['localhost', '127.0.0.1']);
+
     session_set_cookie_params([
         'lifetime' => 0,
         'path' => '/',
-        'domain' => 'clinica-api-u24q.onrender.com', // opcional, ajustar según dominio
-        'secure' => true,            // requiere HTTPS
+        'domain' => $isLocal ? 'localhost' : getenv("API_DOMAIN"),
+        'secure' => !$isLocal,
         'httponly' => true,
-        'samesite' => 'None'
+        'samesite' => $isLocal ? 'Lax' : 'None'
     ]);
     ob_start();
     session_start();
