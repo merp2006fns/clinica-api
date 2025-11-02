@@ -1,20 +1,27 @@
 <?php
-// CORS desde PHP (fallback / single source of truth)
+// Inicia output buffering y/o session antes de cualquier salida si usas session
+
+// CORS: lista blanca de orígenes
 $allowed_origins = [
     'https://clinica-frontend-react.vercel.app',
-    'http://localhost:5173',
-    'https://clinicaproxdomg.free.nf'
+    'http://localhost:5173'
 ];
 
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 if (in_array($origin, $allowed_origins, true)) {
-    header("Access-Control-Allow-Origin: $origin");
+    // Elimina posibles cabeceras duplicadas previamente seteadas
+    header_remove('Access-Control-Allow-Origin');
+    header_remove('Access-Control-Allow-Credentials');
+    header_remove('Access-Control-Allow-Methods');
+    header_remove('Access-Control-Allow-Headers');
+
+    header("Access-Control-Allow-Origin: {$origin}");
     header("Access-Control-Allow-Credentials: true");
     header("Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 }
 
-// Responder preflight desde PHP si llega aquí
+// Responder preflight rapido y salir
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;

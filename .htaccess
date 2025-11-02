@@ -1,15 +1,7 @@
 RewriteEngine On
 RewriteBase /
 
-# Headers CORS (aplicarán si mod_headers está activo)
-<IfModule mod_headers.c>
-  Header always set Access-Control-Allow-Origin "https://clinica-frontend-react.vercel.app"
-  Header always set Access-Control-Allow-Credentials "true"
-  Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-  Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
-</IfModule>
-
-# Responder preflight OPTIONS rápido
+# Responder preflight OPTIONS rápido (no ejecuta index.php)
 RewriteCond %{REQUEST_METHOD} =OPTIONS
 RewriteRule ^ - [R=200,L]
 
