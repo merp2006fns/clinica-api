@@ -1,5 +1,9 @@
 <?php
 // Inicia output buffering y/o session antes de cualquier salida si usas session
+ob_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // CORS: lista blanca de orígenes
 $allowed_origins = [
