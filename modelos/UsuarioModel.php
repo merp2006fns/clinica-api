@@ -48,7 +48,7 @@ class UsuarioModel extends BaseModel
      * @param array $conditions Condiciones adicionales de filtrado
      * @return array Usuarios encontrados con paginación
      */
-    public function buscarByDatos($termino, $page = null, $perPage = null, $conditions)
+    public function buscarByDatos($termino, $page = null, $perPage = null, $conditions = [])
     {
         return parent::buscarByTermino(
             $termino,
