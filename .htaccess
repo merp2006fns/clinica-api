@@ -1,9 +1,8 @@
 RewriteEngine On
 RewriteBase /
 
-# Responder preflight OPTIONS rápido (si Apache recibe la petición)
-RewriteCond %{REQUEST_METHOD} =OPTIONS
-RewriteRule ^ - [R=200,L]
+# No responder OPTIONS aquí; dejamos que PHP lo haga para incluir headers CORS
+# (quita cualquier Header ... aquí si ya manejas CORS en PHP)
 
 # Redirigir todo al index.php (excepto archivos existentes)
 RewriteCond %{REQUEST_FILENAME} !-f

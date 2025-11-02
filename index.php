@@ -1,13 +1,13 @@
 <?php
-// START — no imprimir nada antes de esto
+// index.php — front controller (pegar en la raíz)
 
-// Buffer y session (opcional, session antes de cualquier salida)
+// START — no imprimir nada antes de esto
 if (session_status() === PHP_SESSION_NONE) {
     ob_start();
     session_start();
 }
 
-// CORS: lista blanca de orígenes
+// Lista blanca de orígenes
 $allowed_origins = [
     'https://clinica-frontend-react.vercel.app',
     'http://localhost:5173'
@@ -27,16 +27,15 @@ if (in_array($origin, $allowed_origins, true)) {
     header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 }
 
-// Responder preflight rápido y salir (antes de incluir rutas)
+// Responder preflight con PHP y salir (antes de incluir rutas)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
 }
 
-// Content type para respuestas JSON
 header('Content-Type: application/json; charset=utf-8');
 
-// Ahora incluir boot/router (estos archivos NO deben imprimir nada al incluirse)
+// ahora incluir boot/router (estos archivos NO deben imprimir nada)
 require_once __DIR__ . '/rutas/api.php';
 
 try {
