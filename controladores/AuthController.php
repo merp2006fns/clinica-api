@@ -14,6 +14,14 @@ class AuthController
     {
         $this->model = new UsuarioModel();
         if (session_status() === PHP_SESSION_NONE) {
+            session_set_cookie_params([
+                'lifetime' => 0,
+                'path' => '/',
+                'domain' => 'clinica-api-u24q.onrender.com', // opcional, ajustar según dominio
+                'secure' => true,            // requiere HTTPS
+                'httponly' => true,
+                'samesite' => 'None'
+            ]);
             session_start();
         }
     }

@@ -1,17 +1,17 @@
 <?php
 // index.php — front controller (pegar en la raíz)
 // antes de session_start()
-session_set_cookie_params([
-  'lifetime' => 0,
-  'path' => '/',
-  'domain' => 'clinica-api-u24q.onrender.com', // opcional, ajustar según dominio
-  'secure' => true,            // requiere HTTPS
-  'httponly' => true,
-  'samesite' => 'None'
-]);
 
 // START — no imprimir nada antes de esto
 if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'domain' => 'clinica-api-u24q.onrender.com', // opcional, ajustar según dominio
+        'secure' => true,            // requiere HTTPS
+        'httponly' => true,
+        'samesite' => 'None'
+    ]);
     ob_start();
     session_start();
 }
