@@ -1,17 +1,19 @@
 RewriteEngine On
 RewriteBase /
 
-# Headers CORS
-Header always set Access-Control-Allow-Origin "https://clinica-frontend-react.vercel.app"
-header("Access-Control-Allow-Credentials: true");
-Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
+# Headers CORS (aplicarán si mod_headers está activo)
+<IfModule mod_headers.c>
+  Header always set Access-Control-Allow-Origin "https://clinica-frontend-react.vercel.app"
+  Header always set Access-Control-Allow-Credentials "true"
+  Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+  Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+</IfModule>
 
-# Manejar preflight CORS
-RewriteCond %{REQUEST_METHOD} OPTIONS
-RewriteRule ^(.*)$ - [R=200,L]
+# Responder preflight OPTIONS rápido
+RewriteCond %{REQUEST_METHOD} =OPTIONS
+RewriteRule ^ - [R=200,L]
 
 # Redirigir todo al index.php (excepto archivos existentes)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteRule ^ index.php [QSA,L]
