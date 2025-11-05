@@ -1,7 +1,4 @@
 <?php
-// index.php — front controller (pegar en la raíz)
-// antes de session_start()
-
 // START — no imprimir nada antes de esto
 if (session_status() === PHP_SESSION_NONE) {
     $isLocal = in_array($_SERVER['HTTP_HOST'], ['localhost', '127.0.0.1']);
@@ -38,7 +35,6 @@ if (in_array($origin, $allowed_origins, true)) {
     header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 }
 
-// Responder preflight con PHP y salir (antes de incluir rutas)
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit;
@@ -46,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 header('Content-Type: application/json; charset=utf-8');
 
-// ahora incluir boot/router (estos archivos NO deben imprimir nada)
 require_once __DIR__ . '/rutas/api.php';
 
 try {
