@@ -52,7 +52,7 @@ class UsuarioModel extends BaseModel
     {
         return parent::buscarByTermino(
             $termino,
-            ['nombre', 'correo', 'rol'],
+            ['nombre', 'correo', 'rol', 'id'],
             false,
             $conditions,
             'nombre ASC',

@@ -25,7 +25,7 @@ class PacientesModel extends BaseModel
      */
     public function buscarByDatos(string $termino, $page = null, $perPage = null)
     {
-        return $this->buscarByTermino($termino, ['nombre', 'telefono', 'correo'], false, [], '', [], '*', $page, $perPage);
+        return $this->buscarByTermino($termino, ['nombre', 'telefono', 'correo','id'], false, [], '', [], '*', $page, $perPage);
     }
 
     /**

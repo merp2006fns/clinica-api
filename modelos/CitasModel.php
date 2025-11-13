@@ -84,6 +84,9 @@ class CitasModel extends BaseModel
 
         $camposBusqueda = [
             'c.notas',
+            'c.id',
+            'c.medico_usuario_id',
+            'c.paciente_id',
             'c.estado',
             'p.nombre',
             'u.nombre',

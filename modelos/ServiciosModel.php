@@ -23,7 +23,7 @@ class ServiciosModel extends BaseModel
      */
     public function buscarByDatos(string $termino, $page = null, $perPage = null)
     {
-        return $this->buscarByTermino($termino, ['nombre'], false, [], '', [], '*', $page, $perPage);
+        return $this->buscarByTermino($termino, ['nombre', 'id'], false, [], '', [], '*', $page, $perPage);
     }
 
     /**
